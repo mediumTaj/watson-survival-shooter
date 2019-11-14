@@ -3463,6 +3463,14 @@ PrefabInstance:
       propertyPath: m_BounceIntensity
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3095e2c4424c84d2bbf32aea86c5521d, type: 3}
+    - target: {fileID: 8200000, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+      propertyPath: Pan2D
+      value: -0.26
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
 --- !u!1 &1695883712
