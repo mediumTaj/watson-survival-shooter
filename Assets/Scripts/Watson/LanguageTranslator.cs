@@ -71,6 +71,11 @@ namespace IBM.Watsson.Examples.SurvivalShooter
                 yield return null;
 
             languageTranslatorService = new LanguageTranslatorService("2019-11-12", authenticator);
+
+            if (!string.IsNullOrEmpty(serviceUrl))
+            {
+                languageTranslatorService.SetServiceUrl(serviceUrl);
+            }
         }
 
         public void Translate(string text)

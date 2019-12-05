@@ -74,6 +74,11 @@ namespace IBM.Watsson.Examples.SurvivalShooter
 
             assistantService = new AssistantService("2019-11-12", authenticator);
 
+            if(!string.IsNullOrEmpty(serviceUrl))
+            {
+                assistantService.SetServiceUrl(serviceUrl);
+            }
+
             //  Create a session
             CreateSession();
         }
