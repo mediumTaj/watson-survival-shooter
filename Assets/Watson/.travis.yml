@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- "8.3"
+- "10"
 os:
 - osx
 osx_image: xcode61
@@ -20,6 +20,8 @@ install:
 - npm install @semantic-release/changelog
 - npm install @semantic-release/git
 - npm install @semantic-release/github
+- npm install @semantic-release/commit-analyzer
+- npm install @semantic-release/release-notes-generator
 - ./Travis/installUnity.sh
 before_script:
 - chmod a+x ./Travis/createProject.sh

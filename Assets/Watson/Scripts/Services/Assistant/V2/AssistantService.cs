@@ -72,6 +72,7 @@ namespace IBM.Watson.Assistant.V2
         public AssistantService(string versionDate, Authenticator authenticator) : base(versionDate, authenticator, serviceId)
         {
             Authenticator = authenticator;
+
             if (string.IsNullOrEmpty(versionDate))
             {
                 throw new ArgumentNullException("A versionDate (format `yyyy-mm-dd`) is required to create an instance of AssistantService");
@@ -80,7 +81,6 @@ namespace IBM.Watson.Assistant.V2
             {
                 VersionDate = versionDate;
             }
-
 
             if (string.IsNullOrEmpty(GetServiceUrl()))
             {
@@ -92,7 +92,9 @@ namespace IBM.Watson.Assistant.V2
         /// Create a session.
         ///
         /// Create a new session. A session is used to send user input to a skill and receive responses. It also
-        /// maintains the state of the conversation.
+        /// maintains the state of the conversation. A session persists until it is deleted, or until it times out
+        /// because of inactivity. (For more information, see the
+        /// [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-settings).
         /// </summary>
         /// <param name="callback">The callback function that is invoked when the operation completes.</param>
         /// <param name="assistantId">Unique identifier of the assistant. To find the assistant ID in the Watson
@@ -132,13 +134,10 @@ namespace IBM.Watson.Assistant.V2
 
             req.OnResponse = OnCreateSessionResponse;
 
-            RESTConnector connector = RESTConnector.GetConnector(Authenticator, string.Format("/v2/assistants/{0}/sessions", assistantId), GetServiceUrl());
-            if (connector == null)
-            {
-                return false;
-            }
+            Connector.URL = GetServiceUrl() + string.Format("/v2/assistants/{0}/sessions", assistantId);
+            Authenticator.Authenticate(Connector);
 
-            return connector.Send(req);
+            return Connector.Send(req);
         }
 
         private void OnCreateSessionResponse(RESTConnector.Request req, RESTConnector.Response resp)
@@ -168,7 +167,9 @@ namespace IBM.Watson.Assistant.V2
         /// <summary>
         /// Delete session.
         ///
-        /// Deletes a session explicitly before it times out.
+        /// Deletes a session explicitly before it times out. (For more information about the session inactivity
+        /// timeout, see the
+        /// [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-settings)).
         /// </summary>
         /// <param name="callback">The callback function that is invoked when the operation completes.</param>
         /// <param name="assistantId">Unique identifier of the assistant. To find the assistant ID in the Watson
@@ -211,13 +212,10 @@ namespace IBM.Watson.Assistant.V2
 
             req.OnResponse = OnDeleteSessionResponse;
 
-            RESTConnector connector = RESTConnector.GetConnector(Authenticator, string.Format("/v2/assistants/{0}/sessions/{1}", assistantId, sessionId), GetServiceUrl());
-            if (connector == null)
-            {
-                return false;
-            }
+            Connector.URL = GetServiceUrl() + string.Format("/v2/assistants/{0}/sessions/{1}", assistantId, sessionId);
+            Authenticator.Authenticate(Connector);
 
-            return connector.Send(req);
+            return Connector.Send(req);
         }
 
         private void OnDeleteSessionResponse(RESTConnector.Request req, RESTConnector.Response resp)
@@ -305,13 +303,10 @@ namespace IBM.Watson.Assistant.V2
 
             req.OnResponse = OnMessageResponse;
 
-            RESTConnector connector = RESTConnector.GetConnector(Authenticator, string.Format("/v2/assistants/{0}/sessions/{1}/message", assistantId, sessionId), GetServiceUrl());
-            if (connector == null)
-            {
-                return false;
-            }
+            Connector.URL = GetServiceUrl() + string.Format("/v2/assistants/{0}/sessions/{1}/message", assistantId, sessionId);
+            Authenticator.Authenticate(Connector);
 
-            return connector.Send(req);
+            return Connector.Send(req);
         }
 
         private void OnMessageResponse(RESTConnector.Request req, RESTConnector.Response resp)

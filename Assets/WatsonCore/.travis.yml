@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- "8.3"
+- "10"
 os:
 - osx
 osx_image: xcode61
@@ -18,6 +18,8 @@ before_install:
 install:
 - pip install bumpversion
 - npm install @semantic-release/exec
+- npm install @semantic-release/commit-analyzer
+- npm install @semantic-release/release-notes-generator
 - npm install @semantic-release/changelog
 - npm install @semantic-release/git
 - npm install @semantic-release/github

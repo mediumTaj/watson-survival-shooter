@@ -1,3 +1,18 @@
+## [1.1.1](https://github.com/IBM/unity-sdk-core/compare/v1.1.0...v1.1.1) (2019-12-04)
+
+
+### Bug Fixes
+
+* do not throw error before setting defaulr url ([cb0f308](https://github.com/IBM/unity-sdk-core/commit/cb0f3085660e60ac130f3899a4e35aceb7c200dd))
+
+# [1.1.0](https://github.com/IBM/unity-sdk-core/compare/v1.0.0...v1.1.0) (2019-11-27)
+
+
+### Features
+
+* add support for json sub types ([d1f3809](https://github.com/IBM/unity-sdk-core/commit/d1f38099d03fa02aab9113b655844ca9c363dc5a))
+* make connectors settable to use them in unit tests ([6a42a27](https://github.com/IBM/unity-sdk-core/commit/6a42a2724adf33610aba309d28945c82fc9b1223))
+
 # [1.0.0](https://github.com/IBM/unity-sdk-core/compare/v0.3.0...v1.0.0) (2019-10-04)
 
 

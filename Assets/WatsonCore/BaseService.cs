@@ -31,6 +31,19 @@ namespace IBM.Cloud.SDK
         /// Gets and sets the authenticator of the service.
         public Authenticator Authenticator { get; set; }
         #endregion
+
+        #region Connector
+        private RESTConnector _connector;
+        /// <summary>
+        /// Gets and sets the Connector of the service.
+        /// </summary>
+        public RESTConnector Connector
+        {
+            get { return _connector; }
+            set { _connector = value; }
+        }
+        #endregion
+
         protected string serviceUrl;
         public string ServiceId { get; set; }
         protected Dictionary<string, string> customRequestHeaders = new Dictionary<string, string>();
@@ -51,10 +64,20 @@ namespace IBM.Cloud.SDK
             {
                 SetServiceUrl(url);
             }
+
+            Connector = new RESTConnector();
         }
 
         public void SetServiceUrl(string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                throw new ArgumentNullException("The serviceUrl must not be empty or null.");
+            }
+            if (Utility.HasBadFirstOrLastCharacter(url))
+            {
+                throw new ArgumentException("The serviceUrl property is invalid. Please remove any surrounding {{, }}, or \" characters.");
+            }
             serviceUrl = url;
         }
 
